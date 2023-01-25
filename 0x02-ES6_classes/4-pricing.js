@@ -13,38 +13,38 @@ export default class Pricing {
   set amount(value) {
     if (typeof value !== 'number') {
       throw new TypeError('amount must be a number');
+    }
+    this._amount = value;
   }
-  this._amount = value;
-}
 
-/**
- * @returns {Currency}
- */
-get currency() {
-  return this._currency;
-}
-
-/**
- * @param {Currency} value
- */
-set currency(value) {
-  if (!(value instanceof Currency)) {
-    throw new TypeError('currency must be a Currency');
+  /**
+  * @returns {Currency}
+  */
+  get currency() {
+    return this._currency;
   }
-  this._currency = value;
-}
 
-displayFullPrice() {
-  return `${this.amount} ${this.currency.name} (${this.currency.code})`;
-}
+  /**
+  * @param {Currency} value
+  */
+  set currency(value) {
+    if (!(value instanceof Currency)) {
+      throw new TypeError('currency must be a Currency');
+    }
+    this._currency = value;
+  }
 
-static convertPrice(amount, conversionRate) {
-  if (typeof amount !== 'number') {
-    throw new TypeError('amount must be a number');
+  displayFullPrice() {
+    return `${this.amount} ${this.currency.name} (${this.currency.code})`;
   }
-  if (typeof conversionRate !== 'number') {
-    throw new TypeError('conversionRate must be a number');
+
+  static convertPrice(amount, conversionRate) {
+    if (typeof amount !== 'number') {
+      throw new TypeError('amount must be a number');
+    }
+    if (typeof conversionRate !== 'number') {
+      throw new TypeError('conversionRate must be a number');
+    }
+    return amount * conversionRate;
   }
-  return amount * conversionRate;
- }
 }
